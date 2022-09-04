@@ -2,8 +2,9 @@ import './css/styles.css';
 import debounce from 'lodash.debounce';
 import Notiflix from 'notiflix';
 import { fetchCountries } from './fetchCountries';
+// import countryForm from './templates/country.hbs';
 
-const DEBOUNCE_DELAY = 300;
+const DEBOUNCE_DELAY = 500;
 
 const inputRef = document.querySelector('#search-box');
 const divInfoRef = document.querySelector('.country-info');
@@ -20,7 +21,7 @@ function onInputType() {
 function markup(countries) {
   clearPage();
 
-  console.log(countries[0]);
+  // console.log(countries[0]);
 
   if (countries.length === 1) {
     markupCard(countries[0]);
@@ -38,18 +39,16 @@ function markup(countries) {
 
 function markupCard(country) {
   ulListRef.innerHTML = '';
+  const languages = Object.values(country.languages);
+
   divInfoRef.innerHTML = `<div class="country-label">
         <img src="${country.flags.svg}" alt="${country.name.common}" class="country-flag" />
         <h1 class="country-name">${country.name.common}</h1>
       </div>
       <p class="paragraph">Capital: <span class="value">${country.capital}</span></p>
       <p class="paragraph">Population: <span class="value">${country.population}</span></p>
-      <p class="paragraph">Languages: <span class="value">${country.languages}</span></p>
+      <p class="paragraph">Languages: <span class="value">${languages}</span></p>
       `;
-}
-
-function chooseLanguages(country) {
-  console.dir(country[0].languages);
 }
 
 function markupList(country) {
