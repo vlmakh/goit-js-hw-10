@@ -13,9 +13,14 @@ const ulListRef = document.querySelector('.country-list');
 inputRef.addEventListener('input', debounce(onInputType, DEBOUNCE_DELAY));
 
 function onInputType() {
-  fetchCountries(inputRef.value)
-    .then(markup)
-    .catch(error => Notiflix.Notify.failure(`${error}`));
+  if (inputRef.value === '') {
+    clearPage();
+    return;
+  } else {
+    fetchCountries(inputRef.value)
+      .then(markup)
+      .catch(error => Notiflix.Notify.failure(`${error}`));
+  }
 }
 
 function markup(countries) {
