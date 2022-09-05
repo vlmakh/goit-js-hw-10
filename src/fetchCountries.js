@@ -5,8 +5,3 @@ export function fetchCountries(searchQuery) {
     }
   );
 }
-
-// `https://restcountries.com/v3.1/name/${searchQuery}?fields=name,capital,currencies`
-
-// https://restcountries.com/v2/{service}?fields={field},{field},{field}
-// https://restcountries.com/v2/all?fields=name,capital,languages,population
