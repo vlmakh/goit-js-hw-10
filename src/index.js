@@ -3,7 +3,12 @@ import debounce from 'lodash.debounce';
 import Notiflix from 'notiflix';
 import { fetchCountries } from './fetchCountries';
 
-const DEBOUNCE_DELAY = 500;
+Notiflix.Notify.init({
+  position: 'center-center', // 'right-top' - 'right-bottom' - 'left-top' - 'left-bottom' - 'center-top' - 'center-bottom' - 'center-center'
+  cssAnimationStyle: 'zoom', // 'fade' - 'zoom' - 'from-right' - 'from-top' - 'from-bottom' - 'from-left'
+});
+
+const DEBOUNCE_DELAY = 400;
 
 const inputRef = document.querySelector('#search-box');
 const divInfoRef = document.querySelector('.country-info');
@@ -25,8 +30,6 @@ function onInputType() {
 function markup(countries) {
   clearPage();
 
-  // console.log(countries[0]);
-
   if (countries.length === 1) {
     markupCard(countries[0]);
   } else if (countries.length >= 2 && countries.length <= 10) {
@@ -45,12 +48,14 @@ function markupCard(country) {
   ulListRef.innerHTML = '';
   const languages = Object.values(country.languages);
 
+  const { flags, name, capital, population } = country;
+
   divInfoRef.innerHTML = `<div class="country-label">
-        <img src="${country.flags.svg}" alt="${country.name.common}" class="country-flag" />
-        <h1 class="country-name">${country.name.common}</h1>
+        <img src="${flags.svg}" alt="${name.common}" class="country-flag" />
+        <h1 class="country-name">${name.common}</h1>
       </div>
-      <p class="paragraph">Capital: <span class="value">${country.capital}</span></p>
-      <p class="paragraph">Population: <span class="value">${country.population}</span></p>
+      <p class="paragraph">Capital: <span class="value">${capital}</span></p>
+      <p class="paragraph">Population: <span class="value">${population}</span></p>
       <p class="paragraph">Languages: <span class="value">${languages}</span></p>
       `;
 }
