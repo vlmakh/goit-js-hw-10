@@ -46,7 +46,7 @@ function markup(countries) {
 
 function markupCard(country) {
   ulListRef.innerHTML = '';
-  const languages = Object.values(country.languages);
+  const languages = Object.values(country.languages).join(', ');
 
   const { flags, name, capital, population } = country;
 
